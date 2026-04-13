@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="si">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>සිංහල අවුරුදු නැකැත් 2026</title>
+  <link rel="icon" type="image/x-icon" href="sun.png">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Sinhala:wght@100..900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Noto Serif Sinhala", serif;
+    }
+
+    body {
+      background: #4a4800;
+      font-family: "Noto Serif Sinhala", serif;
+      color: #ffd700;
+      min-height: 100vh;
+      max-width: 480px;
+      margin: 0 auto;
+      position: relative
+    }
+
+    /* Header */
+    .header {
+      background: #3a3600;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid #6a6200
+    }
+
+    .back-btn {
+      color: #ffd700;
+      font-size: 22px;
+      cursor: pointer;
+      margin-right: 16px;
+      line-height: 1
+    }
+
+    .header h1 {
+      color: #ffd700;
+      font-size: 19px;
+      font-weight: 600
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(180deg, #5a5600 0%, #3e3b00 100%);
+      padding: 10px 10px 22px;
+      text-align: center;
+      position: relative;
+      overflow: hidden
+    }
+
+    .hero-suns {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      position: relative;
+      z-index: 1
+    }
+
+    .sun-svg {
+      width: 100px;
+      height: 90px
+    }
+
+    .hero-text {
+      position: relative;
+      z-index: 2;
+      margin-top: -10px
+    }
+
+    .hero-title {
+      font-size: 44px;
+      color: #ffd700;
+      font-weight: 700;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, .6);
+      line-height: 1.1
+    }
+
+    .hero-sub {
+      display: inline-block;
+      background: rgba(0, 0, 0, .35);
+      color: #ffd700;
+      font-size: 17px;
+      padding: 3px 18px;
+      border-radius: 5px;
+      margin-top: 4px;
+    }
+
+    .lotus-bg {
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      opacity: .08
+    }
+
+    /* List */
+    .list-wrap {
+      padding: 14px 13px 100px
+    }
+
+    .nekath-card {
+      background: #2b2900;
+      border-radius: 60px;
+      padding: 11px 14px 11px 11px;
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      cursor: pointer;
+      transition: transform .18s, box-shadow .18s;
+      margin-bottom: 11px;
+      border: 2px solid transparent
+    }
+
+    .nekath-card:hover {
+      transform: scale(1.015);
+      box-shadow: 0 4px 18px rgba(255, 215, 0, .18)
+    }
+
+    .nekath-card.next-up {
+      border-color: #ffd700;
+      box-shadow: 0 0 18px rgba(255, 215, 0, .25)
+    }
+
+    .nekath-card.past {
+      opacity: .55
+    }
+
+    .icon-circle {
+      background: #ffd700;
+      border-radius: 50%;
+      width: 54px;
+      height: 54px;
+      min-width: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 27px
+    }
+
+    .card-body h3 {
+      font-size: 15.5px;
+      color: #ffd700;
+      font-weight: 700;
+      line-height: 1.3
+    }
+
+    .card-body p {
+      font-size: 12.5px;
+      color: #c8a800;
+      margin-top: 3px;
+      line-height: 1.4
+    }
+
+    /* Countdown bar */
+    .countdown-bar {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 480px;
+      background: #ffd700;
+      padding: 13px 18px;
+      text-align: center;
+      z-index: 90
+    }
+
+    .cd-label {
+      font-size: 13.5px;
+      color: #2a2700;
+      font-weight: 600
+    }
+
+    .cd-time {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1a1700;
+      margin-top: 2px;
+      letter-spacing: 1px;
+      border-radius: 50px;
+    }
+
+    /* Modal overlay */
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .78);
+      z-index: 200;
+      justify-content: center;
+      align-items: center;
+      padding: 20px
+    }
+
+    .overlay.open {
+      display: flex
+    }
+
+    .modal {
+      background: #3c3900;
+      border-radius: 22px;
+      padding: 28px 22px 28px;
+      max-width: 320px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      animation: pop .25s ease
+    }
+
+    @keyframes pop {
+      from {
+        transform: scale(.85);
+        opacity: 0
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1
+      }
+    }
+
+    .m-icon {
+      background: #ffd700;
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      margin: -58px auto 18px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, .4)
+    }
+
+    .m-close {
+      position: absolute;
+      top: 13px;
+      right: 16px;
+      color: #ffd700;
+      font-size: 20px;
+      cursor: pointer;
+      line-height: 1;
+      background: rgba(0, 0, 0, .3);
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .m-title {
+      color: #ffd700;
+      font-size: 19px;
+      font-weight: 700;
+      margin-bottom: 13px
+    }
+
+    .m-desc {
+      color: #d4b000;
+      font-size: 14px;
+      line-height: 1.7
+    }
+
+    .m-badge {
+      display: inline-block;
+      background: #ffd700;
+      color: #2a2700;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 12px;
+      margin-top: 12px
+    }
+  </style>
+</head>
+
+<body>
+  <div class="hero">
+    <div class="hero-suns">
+      <!-- Sun Left -->
+      <img src="sun.png" alt="sun" class="sun-svg">
+      <!-- Moon Right -->
+      <img src="sun.png" alt="sun" class="sun-svg">
+    </div>
+    <div class="hero-text">
+      <div class="hero-title">නැකැත් සීට්ටුව</div>
+      <br>
+      <div class="hero-sub">තිසුල ඩිවලොප්මන්ට් වෙතින්</div>
+    </div>
+    <!-- Lotus BG -->
+    <svg class="lotus-bg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="90" fill="none" stroke="#ffd700" stroke-width="2" />
+      <circle cx="100" cy="100" r="70" fill="none" stroke="#ffd700" stroke-width="1.5" />
+      <path d="M100 10 Q130 40 100 70 Q70 40 100 10Z" fill="#ffd700" />
+      <path d="M190 100 Q160 130 130 100 Q160 70 190 100Z" fill="#ffd700" />
+      <path d="M100 190 Q70 160 100 130 Q130 160 100 190Z" fill="#ffd700" />
+      <path d="M10 100 Q40 70 70 100 Q40 130 10 100Z" fill="#ffd700" />
+      <path d="M155 45 Q150 80 120 80 Q130 50 155 45Z" fill="#ffd700" />
+      <path d="M155 155 Q120 150 120 120 Q150 130 155 155Z" fill="#ffd700" />
+      <path d="M45 155 Q50 120 80 120 Q70 150 45 155Z" fill="#ffd700" />
+      <path d="M45 45 Q80 50 80 80 Q50 70 45 45Z" fill="#ffd700" />
+    </svg>
+  </div>
+
+  <div class="list-wrap" id="listWrap"></div>
+
+  <!-- Countdown -->
+  <div class="countdown-bar">
+    <div class="cd-label" id="cdLabel">අලුත් අවුරුදු උදාව ට තව,</div>
+    <div class="cd-time" id="cdTime">…</div>
+  </div>
+
+  <!-- Modal -->
+  <div class="overlay" id="overlay" onclick="closeModal(event)">
+    <div class="modal" id="modal">
+      <div class="m-icon" id="mIcon">🌟</div>
+      <span class="m-close" onclick="closeModal()">✕</span>
+      <div class="m-title" id="mTitle"></div>
+      <div class="m-desc" id="mDesc"></div>
+      <div class="m-badge" id="mBadge"></div>
+    </div>
+  </div>
+
+  <script>
+    const nekath = [
+      {
+        id: 1, icon: "🛁",
+        title: "පරණ අවුරුද්ද සඳහා ස්නානය",
+        short: "අප්‍රේල් මස 13 වන සඳුදා දින",
+        time: new Date("2026-04-13T06:00:00"),
+        desc: "පරණ අවුරුද්ද සමුගැනීමේ ශුභ නැකැතේ ස්නානය සිදු කළ යුතු වේ. මෙය පැරණි වසරෙන් සමු ගෙන නව වසරට ශුද්ධ සිතින් ප්‍රවේශ වීමේ නැකතයි.",
+        badge: "සඳුදා, අප්‍රේල් 13"
+      },
+      {
+        id: 2, icon: "🙏",
+        title: "පුණ්‍ය කාලය",
+        short: "අප්‍රේල් මස 14 වන අඟහරුවාදා පූර්ව භාග 03.08 සිට එදිනම අපර භාග 03.56 දක්වා",
+        time: new Date("2026-04-14T03:08:00"),
+        desc: "අප්‍රේල් මස 14 වන අඟහරුවාදා පූර්ව භාග 03.08 සිට එදිනම අපර භාග 03.56 දක්වා පුණ්‍ය කාලය සේදී තිබෙනවා. මෙම ශුභ කාල සීමාව තුළ ආගමික කටයුතු සිදු කිරීම ශ්‍රේෂ්ඨ වේ.",
+        badge: "අඟහරුවාදා, අප්‍රේල් 14 | පූර්ව භාග. 03:08 – අපර භාග. 03:56"
+      },
+      {
+        id: 3, icon: "🌅",
+        title: "අලුත් අවුරුදු උදාව",
+        short: "අප්‍රේල් මස 14 වන අඟහරුවාදා පූර්ව භාග 09.32 ට - සිංහල අලුත් අවුරුද්ද උදා වේ.",
+        time: new Date("2026-04-14T09:32:00"),
+        desc: "අප්‍රේල් මස 14 වන අඟහරුවාදා පූර්ව භාග 09.32 ට සිංහල හා දෙමළ අලුත් අවුරුද්ද උදා වේ. මෙය 2026 වසරේ අලුත් අවුරුද්ද ආරම්භය වන ශුභ මොහොතයි.",
+        badge: "අඟහරුවාදා, අප්‍රේල් 14 | පූර්ව භාග. 09:32"
+      },
+      {
+        id: 4, icon: "🍲",
+        title: "ආහාර පිසීම",
+        short: "අප්‍රේල් මස 14 වන අඟහරුවාදා පූර්ව භාග 10.51 ට",
+        time: new Date("2026-04-14T10:51:00"),
+        desc: "අප්‍රේල් මස 14 වන අඟහරුවාදා පූර්ව භාග 10.51 ට ශුභ නැකතේ අලුත් අවුරුදු ආහාර පිසීම ආරම්භ කළ යුතු වේ. කිරිබත්, කැවිලි සහ සියලු ආහාර ශුභ දිශාවෙන් ඇල්ලිය යුතු ය.",
+        badge: "අඟහරුවාදා, අප්‍රේල් 14 | පූර්ව භාග. 10:51"
+      },
+      {
+        id: 5, icon: "🤝",
+        title: "වැඩ ඇල්ලීම, ගනුදෙනු කිරීම හා ආහාර අනුභවය",
+        short: "අප්‍රේල් මස 14 වන අඟහරුවාදා අපර භාග 12.06 ට",
+        time: new Date("2026-04-14T12:06:00"),
+        desc: "අප්‍රේල් මස 14 වන අඟහරුවාදා අපර භාග 12.06 ට ශුභ නැකතේ වල් ඇල්ලීම, ගනුදෙනු කිරීම සහ ප්‍රථම ආහාර ගැනීම සිදු කළ යුතු වේ. ශුභ දිශාවෙන් ශුභ ආහාරය ගන්නා ලෙස දැනුම් දෙනු ලැබේ.",
+        badge: "අඟහරුවාදා, අප්‍රේල් 14 | අපර භාග. 12:06"
+      },
+      {
+        id: 6, icon: "🌿",
+        title: "හිසතෙල් ගෑම",
+        short: "අප්‍රේල් මස 15 වෙනි බදාදා පූර්ව භාග 06.55 ට",
+        time: new Date("2026-04-15T06:55:00"),
+        desc: "අප්‍රේල් මස 15 වෙනි බදාදා පූර්ව භාග 06.55 ට ශුභ නැකතේ හිසතෙල් ගෑම සිදු කළ යුතු ය. මෙය සෞභාග්‍ය හා සෞඛ්‍ය ප්‍රාර්ථනාවෙන් කරනු ලබන ශුභ චාරිත්‍රයකි.",
+        badge: "බදාදා, අප්‍රේල් 15 | පූර්ව භාග. 06:55"
+      },
+      {
+        id: 7, icon: "👜",
+        title: "රැකී රක්ෂා සඳහා පිටත්ව යාම",
+        short: "අප්‍රේල් මස 20 වන සඳුදා පූර්ව භාග 06.27 ට",
+        time: new Date("2026-04-20T06:27:00"),
+        desc: "අප්‍රේල් මස 20 වන සඳුදා පූර්ව භාග 06.27 ට ශුභ නැකතේ රැකී රක්ෂා සඳහා හෝ ව්‍යාපාර කටයුතු සඳහා ශුභ දිශාවෙන් පිටත් වීම සිදු කළ යුතු ය.",
+        badge: "සඳුදා, අප්‍රේල් 20 | පූර්ව භාග. 06:27"
+      },
+      {
+        id: 8, icon: "🌱",
+        title: "පැළ සිටුවීම",
+        short: "අප්‍රේල් මස 23 වන බ්‍රහස්පතින්දා පූර්ව භාග 09.01 ට",
+        time: new Date("2026-04-23T09:01:00"),
+        desc: "අප්‍රේල් මස 23 වන බ්‍රහස්පතින්දා පූර්ව භාග 09.01 ට ශුභ නැකතේ ශාක සිටුවීම ආරම්භ කළ යුතු ය. ශුභ දිශාවෙන් ශුභ රෝපණය ආරම්භ කිරීමෙන් කෘෂිකර්ම හා ගෘහස්ත ජීවිතය සශ්‍රීක වේ.",
+        badge: "බ්‍රහස්පතින්දා, අප්‍රේල් 23 | පූර්ව භාග. 09:01"
+      }
+    ];
+
+    const now = () => new Date();
+
+    function getNextNekath() {
+      const n = now();
+      return nekath.find(k => k.time > n) || null;
+    }
+
+    function renderList() {
+      const wrap = document.getElementById('listWrap');
+      const n = now();
+      wrap.innerHTML = '';
+      const next = getNextNekath();
+      nekath.forEach(k => {
+        const div = document.createElement('div');
+        div.className = 'nekath-card' + (k.time < n ? ' past' : '') + (next && next.id === k.id ? ' next-up' : '');
+        div.innerHTML = `
+      <div class="icon-circle">${k.icon}</div>
+      <div class="card-body">
+        <h3>${k.title}</h3>
+        <p>${k.short}</p>
+      </div>`;
+        div.onclick = () => openModal(k);
+        wrap.appendChild(div);
+      });
+    }
+
+    function openModal(k) {
+      document.getElementById('mIcon').textContent = k.icon;
+      document.getElementById('mTitle').textContent = k.title;
+      // document.getElementById('mDesc').textContent = k.desc;
+      document.getElementById('mBadge').textContent = k.badge;
+      document.getElementById('overlay').classList.add('open');
+    }
+
+    function closeModal(e) {
+      if (!e || e.target === document.getElementById('overlay')) {
+        document.getElementById('overlay').classList.remove('open');
+      }
+    }
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function updateCountdown() {
+      const next = getNextNekath();
+      if (!next) {
+        document.getElementById('cdLabel').textContent = 'සියලු නැකත් සම්පූර්ණ වී ඇත';
+        document.getElementById('cdTime').textContent = '🎉 සුභ අලුත් අවුරුද්දක් වේවා!';
+        return;
+      }
+      const diff = next.time - now();
+      if (diff <= 0) { renderList(); updateCountdown(); return; }
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor((diff % 86400000) / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      document.getElementById('cdLabel').textContent = `${next.title}ට තව,`;
+      let parts = [];
+      if (d > 0) parts.push(`දින ${d}`);
+      parts.push(`පැය ${pad(h)}`);
+      parts.push(`විනාඩි ${pad(m)}`);
+      parts.push(`තත්පර ${pad(s)} යි`);
+      document.getElementById('cdTime').textContent = parts.join(' ');
+    }
+
+    renderList();
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+    setInterval(renderList, 10000);
+  </script>
+</body>
+
+</html>
