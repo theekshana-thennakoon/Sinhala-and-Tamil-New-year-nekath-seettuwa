@@ -112,7 +112,11 @@
 
     /* List */
     .list-wrap {
-      padding: 14px 13px 100px
+      padding: 14px 13px 100px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 11px;
     }
 
     .nekath-card {
@@ -123,9 +127,10 @@
       align-items: center;
       gap: 13px;
       cursor: pointer;
-      transition: transform .18s, box-shadow .18s;
-      margin-bottom: 11px;
-      border: 2px solid transparent
+      transition: transform .18s, box-shadow .18s, width 0.3s, padding 0.3s;
+      border: 2px solid transparent;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .nekath-card:hover {
@@ -139,7 +144,14 @@
     }
 
     .nekath-card.past {
-      opacity: .55
+      opacity: .6;
+      width: calc(33.333% - 7.333px);
+      padding: 10px 6px;
+      border-radius: 24px;
+      gap: 5px;
+      flex-direction: column;
+      text-align: center;
+      justify-content: center;
     }
 
     .icon-circle {
@@ -151,21 +163,51 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 27px
+      font-size: 27px;
+      transition: all 0.3s;
+    }
+
+    .nekath-card.past .icon-circle {
+      width: 32px;
+      height: 32px;
+      min-width: 32px;
+      font-size: 16px;
+    }
+
+    .card-body {
+      flex: 1;
+      min-width: 0;
     }
 
     .card-body h3 {
       font-size: 15.5px;
       color: #ffd700;
       font-weight: 700;
-      line-height: 1.3
+      line-height: 1.3;
+      transition: font-size 0.3s;
+    }
+
+    .nekath-card.past .card-body h3 {
+      font-size: 12.5px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     .card-body p {
       font-size: 12.5px;
       color: #c8a800;
       margin-top: 3px;
-      line-height: 1.4
+      line-height: 1.4;
+    }
+
+    .nekath-card.past .card-body p {
+      font-size: 10.5px;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     /* Countdown bar */
